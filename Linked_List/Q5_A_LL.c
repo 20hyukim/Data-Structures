@@ -81,13 +81,13 @@ int main()
 			printList(&resultBackList);
 			printf("\n");
 			removeAllItems(&ll);
-			removeAllItems(&resultFrontList);
-			removeAllItems(&resultBackList);
+			//removeAllItems(&resultFrontList);
+			//removeAllItems(&resultBackList);
 			break;
 		case 0:
 			removeAllItems(&ll);
-			removeAllItems(&resultFrontList);
-			removeAllItems(&resultBackList);
+			//removeAllItems(&resultFrontList);
+			//removeAllItems(&resultBackList);
 			break;
 		default:
 			printf("Choice unknown;\n");
@@ -102,7 +102,22 @@ int main()
 
 void frontBackSplitLinkedList(LinkedList *ll, LinkedList *resultFrontList, LinkedList *resultBackList)
 {
-	/* add your code here */
+	if (ll == NULL || ll -> head == NULL) {
+		return;
+	}
+
+	int cnt = ll -> size;
+	int half = cnt/2 + cnt%2;
+
+	resultFrontList -> head = ll -> head;
+	ListNode *cur = ll -> head;
+
+	for (int i = 0; i < half - 1; i ++) {
+		cur = cur -> next;
+	}
+
+	resultBackList -> head = cur -> next;
+	cur -> next = NULL;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
