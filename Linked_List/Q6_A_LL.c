@@ -89,6 +89,39 @@ int main()
 int moveMaxToFront(ListNode **ptrHead)
 {
     /* add your code here */
+	if (ptrHead == NULL || *ptrHead == NULL) {
+		return 0;
+	}
+
+	ListNode *front = *ptrHead;
+	ListNode *cur = *ptrHead;
+	ListNode *max_cur;
+	ListNode *f_node = *ptrHead;
+
+	int max_val = front -> item;
+
+	while(cur -> next != NULL) {
+		if (cur -> next -> item > max_val) {
+			max_val = cur -> next -> item;
+			max_cur = cur;
+			f_node = cur -> next;
+		}
+		cur = cur -> next;
+	}
+
+	if (f_node == front) {
+		return max_val;
+	}
+
+	if (max_cur -> next != NULL) {
+		max_cur -> next = max_cur -> next -> next;
+	}
+
+	f_node -> next = front;
+	*ptrHead = f_node;
+
+	return 0;
+
 }
 
 //////////////////////////////////////////////////////////////////////////////////
@@ -179,14 +212,14 @@ int removeNode(LinkedList *ll, int index){
 		free(ll->head);
 		ll->head = cur;
 		ll->size--;
-
+		printf("hi2");
 		return 0;
 	}
 
 	// Find the nodes before and after the target position
 	// Free the target node and reconnect the links
 	if ((pre = findNode(ll, index - 1)) != NULL){
-
+		printf("hi3");
 		if (pre->next == NULL)
 			return -1;
 
