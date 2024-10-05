@@ -111,7 +111,18 @@ int main()
 
 void removeUntil(Stack *s, int value)
 {
-/* add your code here */
+	if (isEmptyStack(s)) {
+		return;
+	}
+	int s_size = s -> ll.size;
+
+	for (int i = 0; i < s_size; i++){
+		if (peek(s) == value) {
+			return;
+		}
+		pop(s);
+	}
+
 }
 
 //////////////////////////////////////////////////////////////////////////////////
