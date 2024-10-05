@@ -8,6 +8,7 @@ Purpose: Implementing the required functions for Question 7 */
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define MIN_INT -1000
 
@@ -104,7 +105,41 @@ int main()
 ////////////////////////////////////////////////////////////
 int balanced(char *expression)
 {
-/* add your code here */
+	int c_len = strlen(expression);
+
+	Stack *s = (Stack *)malloc(sizeof(Stack));
+	s -> ll.size = 0;
+
+	for (int i = 0; i < c_len; i++) {
+		if (*(expression + i) == '(' || *(expression + i) == '[' || *(expression + i) == '{') {
+			push(s, *(expression + i));
+		}
+
+		else {
+			if (isEmptyStack(s)) {
+				return 1;
+			}
+			char popped = pop(s);
+
+			if (popped == '[' && *(expression + i) == ']') {
+				continue;
+			}
+
+			else if (popped == '(' && *(expression + i) == ')') {
+				continue;
+			}
+
+			else if (popped == '{' && *(expression + i) == '}') {
+				continue;
+			}
+			return 1;
+		}
+	}
+
+	if (isEmptyStack(s)) {
+		return 0;
+	}
+	return 1;
 }
 
 ////////////////////////////////////////////////////////////
